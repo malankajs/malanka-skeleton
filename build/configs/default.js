@@ -30,7 +30,7 @@ module.exports = () => {
                 },
                 {
                     test: /\.hbs$/,
-                    loader: require.resolve('malanka/es5/Template/loader')
+                    loader: 'malanka'
                 },
                 {
                     test: /\.css$/,
