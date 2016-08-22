@@ -1,2 +1,9 @@
 {{header}}
 {{content}}
+
+{{#if env.isServer}}
+    <script type="text/javascript" src="/assets/bundle.js"></script>
+{{else}}
+    <span></span>
+{{/if}}
+

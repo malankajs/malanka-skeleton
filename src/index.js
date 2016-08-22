@@ -5,9 +5,11 @@ import {FetchRequest} from 'malanka/es5/Request/FetchRequest';
 
 import {diConfig} from './di.config';
 
+let isRestored = false;
+
 let createRestoreFactory = (data) => {
     return ({id, Module}, dependencies) => {
-        if (data[id]) {
+        if (!isRestored && data[id]) {
             return Module.restore(data[id], dependencies);
         }
     }
@@ -28,7 +30,8 @@ di.put('renderer', new DomRenderer());
 
 then(di({'env': 'env', router: 'router'}, {di}), ({env, router}) => {
     return router.start().then(event => {
-        env.render(event.page, document.body.firstChild);
+        env.render(event.page, document.body);
+        isRestored = true;
     });
 });
 
