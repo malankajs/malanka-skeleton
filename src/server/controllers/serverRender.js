@@ -7,8 +7,11 @@ import {createContainer} from 'di.js/build/di.es5';
 export function serverRender(req, res, next) {
     let di = createContainer(diConfig);
 
-    console.log('request');
     di.put('renderer', new StringRenderer());
+    di.put('request', new GotRequest({
+        baseUrl: 'http://localhost:8000'
+    }));
+
     Promise.resolve(di({router: 'router', 'env': 'env'}, {di}))
         .then(({router, env}) => {
             return router.match(req.url).then(({page}) => {
@@ -45,6 +48,4 @@ export function serverRender(req, res, next) {
         .then(() => {
             di.destroy();
         });
-
-    di.put('request', new GotRequest());
 }

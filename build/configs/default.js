@@ -51,8 +51,7 @@ module.exports = () => {
                 ],
                 components: [
                     __dirname + '/../../src/components/**/*.js'
-                ]
-            }, {
+                ],
                 optimize: {
                     plugins: [
                         new TrimSpacesOptimizer(),
