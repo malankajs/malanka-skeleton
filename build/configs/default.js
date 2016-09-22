@@ -1,10 +1,7 @@
 var Webpack = require('webpack');
 
-var ComponentsScanner = require('malanka/es5/Build/ComponentsScanner').ComponentsScanner;
-var TrimSpacesOptimizer = require('malanka/es5/Template/optimizer/TrimSpacesOptimizer').TrimSpacesOptimizer;
-var StylesOptimizer = require('malanka/es5/Template/optimizer/StylesOptimizer').StylesOptimizer;
-var RequireOptimizer = require('malanka/es5/Template/optimizer/RequireOptimizer').RequireOptimizer;
 var ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
+var {ComponentsScanner, plugins} = require('malanka/es5/build');
 
 var DEBUG = process.env.NODE_ENV !== 'production';
 
@@ -52,13 +49,12 @@ module.exports = () => {
                 components: [
                     __dirname + '/../../src/components/**/*.js'
                 ],
-                optimize: {
-                    plugins: [
-                        new TrimSpacesOptimizer(),
-                        new StylesOptimizer(),
-                        new RequireOptimizer()
-                    ]
-                }
+                plugins: [
+                    new plugins.TemplateTrimSpacesPlugin(),
+                    new plugins.TemplateCSSModulesPlugin(),
+                    new plugins.TemplateFlattenPlugin(),
+                    new plugins.TemplateRequirePlugin()
+                ]
             }),
             extractTextWebpackPlugin
         ]

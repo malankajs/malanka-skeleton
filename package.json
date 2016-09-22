@@ -48,7 +48,7 @@
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
     "got": "^6.3.0",
-    "malanka": "^0.0.3",
+    "malanka": "^0.1.0",
     "malanka-loader": "0.0.1",
     "mocha": "^2.5.3",
     "postcss-loader": "^0.9.1",
